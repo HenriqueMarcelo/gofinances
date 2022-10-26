@@ -22,6 +22,7 @@ module.exports = {
     "prefer-default-export": 0,
     "import/prefer-default-export": 0,
     "react/jsx-props-no-spreading": 0,
+    "react/jsx-no-bind": 0,
   },
 
   // https://github.com/import-js/eslint-plugin-import/issues/1289

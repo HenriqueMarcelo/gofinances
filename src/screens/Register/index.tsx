@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { Modal } from 'react-native';
+
 import { Button } from '../../components/Form/Button';
 import { Input } from '../../components/Form/Input';
 import { TransactionTypeButton } from '../../components/Form/TransactionTypeButton';
-import { CategorySelect } from '../../components/Form/CategorySelect';
+import { CategorySelectButton } from '../../components/Form/CategorySelectButton';
+
+import { CategorySelect } from '../CategorySelect';
+
 import {
   Container,
   Header,
@@ -14,9 +19,23 @@ import {
 
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
+  const [category, setCategory] = useState({
+    key: 'category',
+    name: 'Categoria',
+  });
+
+  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
   function handleTransactionTypeSelect(type: 'up' | 'down') {
     setTransactionType(type);
+  }
+
+  function handleCloseSelectCategoryModal() {
+    setCategoryModalOpen(false);
+  }
+
+  function handleOpenSelectCategoryModal() {
+    setCategoryModalOpen(true);
   }
 
   return (
@@ -28,6 +47,7 @@ export function Register() {
         <Fields>
           <Input placeholder="Nome" />
           <Input placeholder="Preço" />
+
           <TransactionTypes>
             <TransactionTypeButton
               isActive={transactionType === 'up'}
@@ -42,10 +62,22 @@ export function Register() {
               onPress={() => handleTransactionTypeSelect('down')}
             />
           </TransactionTypes>
-          <CategorySelect title="Categorias" />
+
+          <CategorySelectButton
+            title={category.name}
+            onPress={handleOpenSelectCategoryModal}
+          />
         </Fields>
         <Button title="Enviar" />
       </Form>
+
+      <Modal visible={categoryModalOpen}>
+        <CategorySelect
+          category={category}
+          setCategory={setCategory}
+          closeSelectCategory={handleCloseSelectCategoryModal}
+        />
+      </Modal>
     </Container>
   );
 }

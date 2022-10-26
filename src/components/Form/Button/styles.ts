@@ -6,11 +6,12 @@ export const Container = styled(TouchableOpacity)`
     width: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
 
-    
-    padding: 18px;
     border-radius: 5px;
     
     align-items: center;
+    
+    // working around TouchableOpacity in Modal
+    /* padding: 18px; */
 `;
 
 export const Title = styled.Text`
@@ -18,4 +19,10 @@ export const Title = styled.Text`
     font-size: ${RFValue(14)}px;
 
     color: ${({ theme }) => theme.colors.shape};
+
+    // working around TouchableOpacity in Modal
+    background-color: ${({ theme }) => theme.colors.success};
+    padding: 18px;
+    width: 100%;
+    text-align: center;
 `;
