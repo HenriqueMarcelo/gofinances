@@ -28,4 +28,7 @@ export const Form = styled.View`
     flex: 1;
 
     width: 100%;
+    justify-content: space-between;
 `;
+
+export const Fields = styled.View``;
