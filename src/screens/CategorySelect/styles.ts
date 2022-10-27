@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 interface CategoryProps {
   isActive: boolean;
@@ -16,7 +17,10 @@ export const Container = styled(GestureHandlerRootView)`
 
 export const Header = styled.View`
     width: 100%;
-    height: ${RFValue(113)}px;
+
+    // Fixing hight
+    /* height: ${RFValue(113)}px; */
+    height: ${RFValue(113) - getStatusBarHeight()}px;
 
     background-color: ${({ theme }) => theme.colors.primary};
 
