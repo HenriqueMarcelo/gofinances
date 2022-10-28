@@ -24,6 +24,7 @@ module.exports = {
     "react/jsx-props-no-spreading": 0,
     "react/jsx-no-bind": 0,
     "@typescript-eslint/no-unused-vars": 1,
+    "react/no-unstable-nested-components": 0,
   },
 
   // https://github.com/import-js/eslint-plugin-import/issues/1289
