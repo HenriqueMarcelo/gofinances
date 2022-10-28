@@ -1,19 +1,21 @@
+/* eslint-disable import/no-cycle */
 import styled from 'styled-components/native';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
 import { FlatList, FlatListProps } from 'react-native';
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { BorderlessButton } from 'react-native-gesture-handler';
 import { DataListProps } from '.';
-import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper'; 
 
 export const Container = styled.View`
     flex: 1;
-    background-color: ${({theme}) => theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
     width: 100%;
     height: ${RFPercentage(42)}px;
-    background-color: ${({theme}) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.primary};
 
     justify-content: center;
     align-items: flex-start;
@@ -24,7 +26,7 @@ export const UserWrapper = styled.View`
     width: 100%;
     padding: 0px ${RFValue(24)}px;
 
-    margin-top: ${getStatusBarHeight() + RFValue(28) }px;
+    margin-top: ${getStatusBarHeight() + RFValue(28)}px;
     flex-direction: row;
     align-items: center; 
     justify-content: space-between;
@@ -47,26 +49,30 @@ export const User = styled.View`
 `;
 
 export const UserGreeting = styled.Text`
-    color: ${({theme}) => theme.colors.shape};
+    color: ${({ theme }) => theme.colors.shape};
     font-size: ${RFValue(18)}px;
-    font-family: ${({theme}) => theme.fonts.regular};
+    font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
 export const UserName = styled.Text`
-    color: ${({theme}) => theme.colors.shape};
+    color: ${({ theme }) => theme.colors.shape};
     font-size: ${RFValue(18)}px;
-    font-family: ${({theme}) => theme.fonts.bold};
+    font-family: ${({ theme }) => theme.fonts.bold};
+`;
+
+export const LogoutButton = styled(BorderlessButton)`
+
 `;
 
 export const Icon = styled(Feather)`
-    color: ${({theme}) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.secondary};
     font-size: ${RFValue(24)}px;
 `;
 
 export const HighlightCards = styled.ScrollView.attrs({
-    horizontal: true,
-    showsHorizontalScrollIndicator: false,
-    contentContainerStyle: { paddingLeft: 24}
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: { paddingLeft: 24 },
 })`
     width: 100%;
     position: absolute;
@@ -81,15 +87,15 @@ export const Transactions = styled.View`
 
 export const Title = styled.Text`
     font-size: ${RFValue(18)}px;
-    font-family: ${({theme}) => theme.fonts.regular};
+    font-family: ${({ theme }) => theme.fonts.regular};
     margin-bottom: 16px;
 `;
 
 export const TransactionList = styled(
-        FlatList as new ( props: FlatListProps<DataListProps> ) => FlatList<DataListProps> //fixxing
-    ).attrs({
-    showsHorizontalScrollIndicator: false,
-    contentContainerStyle: {
-        paddingBottom: getBottomSpace(),
-    },
+  FlatList as new (props: FlatListProps<DataListProps>) => FlatList<DataListProps>, // fixxing
+).attrs({
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: getBottomSpace(),
+  },
 })``;
