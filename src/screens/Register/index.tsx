@@ -82,7 +82,7 @@ export function Register() {
       return Alert.alert('Selecione a categoria');
     }
 
-    const data = {
+    const newTranslation = {
       name: form.name,
       amount: form.amount,
       transactionType,
@@ -90,7 +90,15 @@ export function Register() {
     };
 
     try {
-      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+      const dataStorage = await AsyncStorage.getItem(dataKey);
+      const currentData = dataStorage ? JSON.parse(dataStorage!) : [];
+
+      const dataFormatter = [
+        ...currentData,
+        newTranslation,
+      ];
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatter));
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
@@ -101,6 +109,7 @@ export function Register() {
   useEffect(() => {
     async function loadData() {
       const data = await AsyncStorage.getItem(dataKey);
+      // eslint-disable-next-line no-console
       console.log(JSON.parse(data!)); // confia
     }
 
