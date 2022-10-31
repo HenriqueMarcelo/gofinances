@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Keyboard,
   Modal,
@@ -7,11 +7,14 @@ import {
   Alert,
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 import { Button } from '../../components/Form/Button';
 import { InputForm } from '../../components/Form/InputForm';
 import { TransactionTypeButton } from '../../components/Form/TransactionTypeButton';
@@ -53,10 +56,13 @@ export function Register() {
 
   const dataKey = '@gofinances:transactions';
 
+  const navigation = useNavigation();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -83,10 +89,12 @@ export function Register() {
     }
 
     const newTranslation = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
       category: category.key,
+      date: new Date(),
     };
 
     try {
@@ -99,22 +107,21 @@ export function Register() {
       ];
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatter));
+
+      reset();
+      setTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria',
+      });
+
+      navigation.navigate('Listagem' as never); // work around | https://stackoverflow.com/a/69258989/6727029
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
       Alert.alert('Não foi possível salvar');
     }
   }
-
-  useEffect(() => {
-    async function loadData() {
-      const data = await AsyncStorage.getItem(dataKey);
-      // eslint-disable-next-line no-console
-      console.log(JSON.parse(data!)); // confia
-    }
-
-    loadData();
-  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
