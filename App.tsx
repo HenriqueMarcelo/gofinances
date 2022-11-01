@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import * as SplashScreen from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -40,6 +41,7 @@ export default function App() {
         }}
       >
         <NavigationContainer>
+          <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
           <AppRoutes />
         </NavigationContainer>
       </GestureHandlerRootView>
