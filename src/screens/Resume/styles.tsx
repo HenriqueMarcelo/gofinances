@@ -17,8 +17,17 @@ export const Header = styled.View`
 
     padding-bottom: 19px;
 `;
+
 export const Title = styled.Text`
     font-family: ${({ theme }) => theme.fonts.regular};
     font-size: ${RFValue(18)}px;
     color: ${({ theme }) => theme.colors.shape};
+`;
+
+export const Content = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 26,
+    flex: 1,
+  },
+})`
 `;
