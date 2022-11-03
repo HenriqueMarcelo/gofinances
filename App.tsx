@@ -18,6 +18,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import theme from './src/global/styles/theme';
 import { AppRoutes } from './src/routes/app.routes';
 
+import { SignIn } from './src/screens/SignIn';
+
 export default function App() {
   SplashScreen.preventAutoHideAsync();
   const [fontsLoaded] = useFonts({
@@ -42,7 +44,8 @@ export default function App() {
       >
         <NavigationContainer>
           <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-          <AppRoutes />
+          {/* <AppRoutes /> */}
+          <SignIn />
         </NavigationContainer>
       </GestureHandlerRootView>
     </ThemeProvider>
