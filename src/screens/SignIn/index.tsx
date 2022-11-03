@@ -7,11 +7,13 @@ import {
   Title,
   SingInTitle,
   Footer,
+  FooterWrapper,
 } from './styles';
 
 import AppleSvg from '../../assets/apple.svg';
 import GoogleSvg from '../../assets/google.svg';
 import LogoSvg from '../../assets/logo.svg';
+import { SignInSocialButton } from '../../components/SignInSocialButton';
 
 export function SignIn() {
   return (
@@ -40,7 +42,12 @@ export function SignIn() {
         </SingInTitle>
       </Header>
 
-      <Footer />
+      <Footer>
+        <FooterWrapper>
+          <SignInSocialButton title="Entrar com o Google" svg={GoogleSvg} />
+          <SignInSocialButton title="Entrar com Apple" svg={AppleSvg} />
+        </FooterWrapper>
+      </Footer>
     </Container>
   );
 }
