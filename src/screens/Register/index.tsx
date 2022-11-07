@@ -100,8 +100,8 @@ export function Register() {
     };
 
     try {
-      // await AsyncStorage.removeItem(dataKey);
       const dataKey = `@gofinances:transactions_user:${user.id}`;
+      await AsyncStorage.removeItem(dataKey);
       const dataStorage = await AsyncStorage.getItem(dataKey);
       const currentData = dataStorage ? JSON.parse(dataStorage!) : [];
 
