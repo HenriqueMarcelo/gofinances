@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert } from 'react-native';
+import { ActivityIndicator, Alert, Platform } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 import {
@@ -69,9 +69,10 @@ export function SignIn() {
         </TitleWrapper>
 
         <SingInTitle>
-          Faça seu login com
+          Faça login com
           {'\n'}
-          uma das contas abaixo
+          { Platform.OS === 'ios' ? 'uma das contas ' : 'uma conta '}
+          abaixo
         </SingInTitle>
       </Header>
 
@@ -82,11 +83,13 @@ export function SignIn() {
             svg={GoogleSvg}
             onPress={handleSignInWithGoogle}
           />
-          <SignInSocialButton
-            title="Entrar com Apple"
-            svg={AppleSvg}
-            onPress={handleSignInWithApple}
-          />
+          { Platform.OS === 'ios' && (
+            <SignInSocialButton
+              title="Entrar com Apple"
+              svg={AppleSvg}
+              onPress={handleSignInWithApple}
+            />
+          ) }
         </FooterWrapper>
 
         { isLoading
