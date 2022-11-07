@@ -28,6 +28,7 @@ import {
   TransactionList,
   LoadContainer,
 } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -47,6 +48,8 @@ export function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>([]);
   const [highlighData, setHighlightData] = useState({} as HighlighData);
+
+  const { signOut, user } = useAuth();
 
   const theme = useTheme();
 
@@ -159,13 +162,13 @@ export function Dashboard() {
               <Header>
                 <UserWrapper>
                   <UserInfo>
-                    <Photo source={{ uri: 'https://avatars.githubusercontent.com/u/16305348?v=4' }} />
+                    <Photo source={{ uri: user.photo }} />
                     <User>
                       <UserGreeting>Olá,</UserGreeting>
-                      <UserName>Marcelo</UserName>
+                      <UserName>{user.name}</UserName>
                     </User>
                   </UserInfo>
-                  <LogoutButton onPress={() => null}>
+                  <LogoutButton onPress={signOut}>
                     <Icon name="power" />
                   </LogoutButton>
                 </UserWrapper>
